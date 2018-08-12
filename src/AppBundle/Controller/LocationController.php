@@ -48,6 +48,7 @@ class LocationController extends Controller {
 			->add('delete', SubmitType::class)
 			->getForm()
 			->handleRequest($request);
+
 		$this->location = $form_delete->getData();
 
 		// if button add clicked
@@ -81,7 +82,8 @@ class LocationController extends Controller {
 	 * @Route("/location/read/{id}", name="read")
 	 */
 	public function readAction($id) {
-		$repository = $this->getDoctrine()->getRepository(Location::class);
+		$repository = $this->getDoctrine()
+			->getRepository(Location::class);
 		$entity = $repository->find($id);
 		$locationData = array('location' => $entity);
 		return $this->json($locationData);
@@ -98,14 +100,15 @@ class LocationController extends Controller {
 	/**
 	 * @Route("/location/delete/{id}", name="delete")
 	 */
-	public function deleteAction() {
-		if ($form_delete->isSubmitted()) {
-			$entity = $this->em->getRepository(Location::class)->findOneById($id);
+	public function deleteAction($id) {
 
-			$this->em->remove($entity);
-			$this->em->flush();
+		$entity = $this->em
+			->getRepository(Location::class)
+			->findOneById($id);
 
-		}
+		$this->em->remove($entity);
+		$this->em->flush();
+
 		return $this->redirectToRoute('homepage');
 	}
 }
