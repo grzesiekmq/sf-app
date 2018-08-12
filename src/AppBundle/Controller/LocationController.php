@@ -25,7 +25,7 @@ class LocationController extends Controller {
 	 * @Route("/", name="homepage")
 	 */
 	public function createAction(Request $request) {
-		$form_read = $this->createFormBuilder($this->location)
+		$form_read = $this->createFormBuilder($this->location, array('allow_extra_fields' => true))
 			->add('id', NumberType::class)
 			->add('read', SubmitType::class)
 			->getForm()
@@ -111,4 +111,5 @@ class LocationController extends Controller {
 
 		return $this->redirectToRoute('homepage');
 	}
+
 }
