@@ -1,4 +1,6 @@
-sf-task
+sf-app
 =======
 
-A Symfony project created on August 7, 2018, 3:57 pm.
+A Symfony CRUD app to create location, read in JSON, update and delete
+
+Location consists of id, name, latitude and longitude
